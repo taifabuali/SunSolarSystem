@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class MetroShooting : MonoBehaviour
 {
-   public GameObject meteorPrefab;  // Assign your meteor prefab here
-    public float minSize = 0.5f;     // Minimum size of the meteor
-    public float maxSize = 3.0f;     // Maximum size of the meteor
-    public float launchForce = 50f; // Force applied to launch the meteor
+   public GameObject meteorPrefab;  
+    public float minSize = 0.5f;     
+    public float maxSize = 3.0f;    
+    public float launchForce = 50f; 
      private GameObject lastLaunchedMeteor;
-    public Transform target;   // target
+    public Transform target;   
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // Launch meteor on spacebar press
+        if (Input.GetKeyDown(KeyCode.Space)) 
         {
             LaunchMeteor();
         }
@@ -43,10 +43,10 @@ public class MetroShooting : MonoBehaviour
         rb.useGravity = false;
         rb.drag = 0.001f;
          rb.angularDrag = 0.001f;
-        // Choose a random target planet
+      
        
 
-        // Apply a force to launch the meteor towards the random planet
+      
         Vector3 launchDirection = (target.position - transform.position).normalized;
         rb.AddForce(launchDirection * launchForce);
 
