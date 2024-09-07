@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class MeteorImpact : MonoBehaviour
 {
-      public GameObject explosionEffect;  // تأثير الانفجار
+      public GameObject explosionEffect;  
 public float hideDelay= 3f;
     private void OnCollisionEnter(Collision collision)
     {
-        // تحقق من نوع الكائن الذي اصطدم به النيزك
         if (collision.gameObject.CompareTag("Celestial"))
         {
             Debug.Log("Meteor collided with: " + collision.gameObject.name);
-            // إنشاء تأثير الانفجار عند الاصطدام
             if (explosionEffect != null)
             {
 
-             // إنشاء تأثير الانفجار في موقع الاصطدام
                GameObject explosion = Instantiate(explosionEffect, collision.contacts[0].point, Quaternion.identity);
                ParticleSystem  explosionParticles = explosion.GetComponent<ParticleSystem>();
 
@@ -29,7 +26,7 @@ public float hideDelay= 3f;
                 }
                 
 
-                Destroy(explosion, 5f);  // إزالة التأثير بعد 2 ثانية
+                Destroy(explosion, 5f);  
                 Debug.Log("Explosion effect instantiated at: " + collision.contacts[0].point);
 
             }
@@ -40,7 +37,6 @@ public float hideDelay= 3f;
 
 StartCoroutine(HideMeteroAfterDelay());
            
-            // التأثيرات الإضافية على الكوكب الذي تم الاصطدام به
        
                 Renderer earthRenderer = collision.gameObject.GetComponent<Renderer>();
                 if (earthRenderer != null)
@@ -58,7 +54,7 @@ StartCoroutine(HideMeteroAfterDelay());
 private IEnumerator HideMeteroAfterDelay()
     {
         
-        yield return new WaitForSeconds(hideDelay);  // مدة التأثير
+        yield return new WaitForSeconds(hideDelay); 
         Renderer meteorRenderer = GetComponent<Renderer>();
             if (meteorRenderer != null)
             {
@@ -77,12 +73,12 @@ private IEnumerator HideMeteroAfterDelay()
     private IEnumerator FlashEarth(Renderer renderer)
     {
         Color originalColor = renderer.material.color;
-        renderer.material.color = Color.red;  // تغيير اللون عند الاصطدام
+        renderer.material.color = Color.red;  
         Debug.Log("Earth color changed to red");
-        yield return new WaitForSeconds(0.5f);  // مدة التأثير
-        if (renderer != null) // تأكد من أن الـ Renderer لم يتم تدميره
+        yield return new WaitForSeconds(0.5f);  
+        if (renderer != null) 
         {
-            renderer.material.color = originalColor;  // العودة إلى اللون الأصلي
+            renderer.material.color = originalColor; 
             Debug.Log("Earth color reverted to original");
         }
     }
